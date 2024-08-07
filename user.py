@@ -7,7 +7,12 @@ class User(Student):
     def __init__(self):
         super().__init__()
         """Initialize the attributes of a user"""
-        self.admin = []  # List to store admin-related information or actions
+        self.admin = [{
+                        "First Name" : "Bruce",
+                        "Last Name" : "Thiombiano",
+                        "Username" : "bruce101",
+                        "Password" : "Test123!?",
+                        },]  # List to store admin-related information or actions
 
     def add_student(self):
         """Add a new student to the record"""
