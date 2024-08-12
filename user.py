@@ -36,7 +36,7 @@ class User(Student):
         
         # Add courses to the student's record
         for course in courses:
-            self.record[-1]["Course"][course.title()] = 0
+            self.record[-1]["Course"][course.title()] = "N/A"
         
         # Assign a unique Student ID
         while True:
