@@ -14,38 +14,63 @@ class Course(User):
         for student in self.record:
             if student_id == student["Student ID"]:
                 if "," not in course:
-                    student["Course"][course] = "N/A"
+                     self.record[-1]["Course"].append({
+                                        "Title" : course.title(),
+                                        "Description" : "N/A",
+                                        "Ojectives" : [],
+                                        "Instructior" : "N/A",
+                                        "Credits" : "N/A",
+                                        "Grade" : "N/A",
+                                        })
                 else:
                     temp_list = course.split(",")
                     for course in temp_list:
-                        student["Course"][course] = "N/A"
+                         self.record[-1]["Course"].append({
+                                        "Title" : course.title(),
+                                        "Description" : "N/A",
+                                        "Ojectives" : [],
+                                        "Instructior" : "N/A",
+                                        "Credits" : "N/A",
+                                        "Grade" : "N/A",
+                                        })
+
 
     def update_course(self, student_id : int, old_course : str, new_course : str):
         """Update Courses"""
         for student in self.record:
             if student_id == student["Student ID"]:
-                student["Course"][new_course] = student["Course"].pop(old_course)
+                for course in student["Course"]:
+                    if course["Title"] == old_course:
+                        course["Title"] = new_course
 
     def delete_course(self, student_id : int, course : str):
         """Delete Courses""";
         for student in self.record:
             if student_id == student["Student ID"]:
-                del student["Course"][course]
+                for courses in student["Course"]:
+                    if courses["Title"] == course:
+                        student["Course"].remove(courses)
 
     def view_course(self, student_id : int, course : str):
         """View Course"""
+        output = ""
         for student in self.record:
             if student_id == student["Student ID"]:
-                output = student["Course"][course]
+                for courses in student["Course"]:
+                    if courses["Title"] == course:
+                        for key,value in courses.items():
+                            output += f"{key} - {value}\n"
                 return output
 
     def list_course(self, student_id : int):
         """List All Courses"""
-        output = "Course - Grade\n"
+        output = "-" * 30 + "\n"
         for student in self.record:
             if student_id == student["Student ID"]:
-                for key,value in student["Course"].items():
-                    output += f"{key} - {value}\n"
+                for courses in student["Course"]:
+                    for key,value in courses.items():
+                        output += f"{key} - {value}\n"
+                    output += "-" * 30 + "\n"
                 return output
 
 

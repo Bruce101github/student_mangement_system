@@ -31,16 +31,23 @@ class User(Student):
             "Last Name": last_name,
             "Age": age,
             "Gender": gender,
-            "Course": {}  # Dictionary to hold course names and their values
+            "Course": []  # Dictionary to hold course names and their values
         })
         
         # Add courses to the student's record
         for course in courses:
-            self.record[-1]["Course"][course.title()] = "N/A"
+            self.record[-1]["Course"].append({
+                                        "Title" : course.title(),
+                                        "Description" : "N/A",
+                                        "Ojectives" : [],
+                                        "Instructior" : "N/A",
+                                        "Credits" : "N/A",
+                                        "Grade" : "N/A",
+                                        })
         
         # Assign a unique Student ID
         while True:
-            unique = True
+            unique = True 
             assigned_id = random.randrange(9999, 99999)  # Generate a random ID
             for student in self.record:
                 if student["Student ID"] == assigned_id:
@@ -72,7 +79,11 @@ class User(Student):
                 output += f"Name: {student['First Name']} {student['Last Name']}\n"
                 output += f"Age: {student['Age']} years.\n"
                 output += f"Gender: {student['Gender']}\n"
-                output += f"Courses: {', '.join(student['Course'])}\n"  # List all courses
+                course_list = []
+                for course in student["Course"]:
+                    title = course["Title"]
+                    course_list.append(course["Title"])    
+                output += f"Courses: {', '.join(course_list)}\n"  # List all courses
         return output
 
     def list_student(self):
@@ -82,7 +93,11 @@ class User(Student):
             output += f"Name: {student['First Name']} {student['Last Name']}\n"
             output += f"Age: {student['Age']} years.\n"
             output += f"Gender: {student['Gender']}\n"
-            output += f"Courses: {', '.join(student['Course'])}\n"  # List all courses
+            course_list = []
+            for course in student["Course"]:
+                title = course["Title"]
+                course_list.append(course["Title"])
+            output += f"Courses: {', '.join(course_list)}\n"  # List all courses
             output += "-" * 30 + "\n"  # Separator between student records
         return output
 
