@@ -18,4 +18,4 @@ class Storage():
     def load(self):
         """Loads save data"""
         content = self.path.read_text()
-        json.loads(content)
+        return json.loads(content)

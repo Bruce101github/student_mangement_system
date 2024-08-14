@@ -33,6 +33,7 @@ class Course(User):
                                         "Credits" : "N/A",
                                         "Grade" : "N/A",
                                         })
+        super().save(self.record)
 
 
     def update_course(self, student_id : int, old_course : str, new_course : str):
@@ -42,6 +43,8 @@ class Course(User):
                 for course in student["Course"]:
                     if course["Title"] == old_course:
                         course["Title"] = new_course
+         super().save(self.record)
+
 
     def delete_course(self, student_id : int, course : str):
         """Delete Courses""";
@@ -50,6 +53,8 @@ class Course(User):
                 for courses in student["Course"]:
                     if courses["Title"] == course:
                         student["Course"].remove(courses)
+        super().save(self.record)
+
 
     def view_course(self, student_id : int, course : str):
         """View Course"""

@@ -13,6 +13,8 @@ class User(Student):
                         "Username" : "bruce101",
                         "Password" : "Test123!?",
                         },]  # List to store admin-related information or actions
+        if self.path.exists():
+            self.record.append(super().load())
 
     def add_student(self):
         """Add a new student to the record"""
@@ -55,7 +57,7 @@ class User(Student):
             if unique:
                 self.record[-1]["Student ID"] = assigned_id
                 break  # Exit loop once a unique ID is found
-        
+        super().save(self.record)
         return f"Student successfully added. Student ID {self.record[-1]['Student ID']}"
 
     def update_student(self, student_ID: str, key: str, value: str):
@@ -63,6 +65,8 @@ class User(Student):
         for student in self.record:
             if student["Student ID"] == student_ID:
                 student[key] = value  # Update the specific detail of the student
+        super().save(self.record)
+
 
     def delete_student(self, student_ID):
         """Delete a student's record"""
@@ -70,6 +74,8 @@ class User(Student):
             if student["Student ID"] == student_ID:
                 self.record.remove(student)  # Remove student from the record
                 return f"Student with ID {student_ID} successfully deleted."
+        super().save(self.record)
+
 
     def view_student(self, student_id):
         """View details of a specific student"""

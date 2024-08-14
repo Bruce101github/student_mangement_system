@@ -16,6 +16,8 @@ class Grade(Course):
                 for courses in student["Course"]:
                     if courses["Title"] == course.title():
                         courses["Grade"] = grade
+         super().save(self.record)
+
 
     def view_grade(self, student_id : int, course : str):
         """View grade"""
