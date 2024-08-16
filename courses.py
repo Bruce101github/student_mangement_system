@@ -43,7 +43,7 @@ class Course(User):
                 for course in student["Course"]:
                     if course["Title"] == old_course:
                         course["Title"] = new_course
-         super().save(self.record)
+        super().save(self.record)
 
 
     def delete_course(self, student_id : int, course : str):
@@ -58,18 +58,19 @@ class Course(User):
 
     def view_course(self, student_id : int, course : str):
         """View Course"""
-        output = ""
+        output = "\n" + ("-" * 30) + "\n"
         for student in self.record:
             if student_id == student["Student ID"]:
                 for courses in student["Course"]:
                     if courses["Title"] == course:
                         for key,value in courses.items():
                             output += f"{key} - {value}\n"
+                        output += "-" * 30 + "\n"
                 return output
 
     def list_course(self, student_id : int):
         """List All Courses"""
-        output = "-" * 30 + "\n"
+        output = "\n" + ("-" * 30) + "\n"
         for student in self.record:
             if student_id == student["Student ID"]:
                 for courses in student["Course"]:
@@ -77,7 +78,3 @@ class Course(User):
                         output += f"{key} - {value}\n"
                     output += "-" * 30 + "\n"
                 return output
-
-
-
-

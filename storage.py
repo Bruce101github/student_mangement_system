@@ -1,3 +1,4 @@
+from pathlib import Path
 import json
 
 
@@ -7,7 +8,7 @@ class Storage():
     def __init__(self, file : str = "database.json"):
         """Initialization"""
         self.file = file
-        self.path = path(file)
+        self.path = Path(file)
 
     def save(self, record : list):
         """Saves data to the database"""

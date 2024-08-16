@@ -16,7 +16,7 @@ class Grade(Course):
                 for courses in student["Course"]:
                     if courses["Title"] == course.title():
                         courses["Grade"] = grade
-         super().save(self.record)
+        super().save(self.record)
 
 
     def view_grade(self, student_id : int, course : str):
@@ -25,7 +25,7 @@ class Grade(Course):
             if student_id == student["Student ID"]:
                 for courses in student["Course"]:
                     if courses["Title"] == course:
-                        output= f"{course["Title"]} - {courses["Grade"]}"
+                        output= f"{courses["Title"]} - {courses["Grade"]}"
         return output
     
     def list_grade(self, student_id : int):

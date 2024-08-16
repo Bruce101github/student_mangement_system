@@ -14,7 +14,7 @@ class User(Student):
                         "Password" : "Test123!?",
                         },]  # List to store admin-related information or actions
         if self.path.exists():
-            self.record.append(super().load())
+            self.record = super().load()
 
     def add_student(self):
         """Add a new student to the record"""
@@ -77,11 +77,12 @@ class User(Student):
         super().save(self.record)
 
 
-    def view_student(self, student_id):
+    def view_student(self, student_id : int):
         """View details of a specific student"""
-        output = ""
+        output = "\n" + ("-" * 30) + "\n"
         for student in self.record:
             if student["Student ID"] == student_id:
+                output += f"Student ID: {student["Student ID"]}\n"
                 output += f"Name: {student['First Name']} {student['Last Name']}\n"
                 output += f"Age: {student['Age']} years.\n"
                 output += f"Gender: {student['Gender']}\n"
@@ -90,12 +91,14 @@ class User(Student):
                     title = course["Title"]
                     course_list.append(course["Title"])    
                 output += f"Courses: {', '.join(course_list)}\n"  # List all courses
+                output += "-" * 30 + "\n"  # Separator between student records
         return output
 
     def list_student(self):
         """List details of all students"""
-        output = ""
+        output = "\n" + ("-" * 30) + "\n"
         for student in self.record:
+            output += f"Student ID: {student["Student ID"]}\n"
             output += f"Name: {student['First Name']} {student['Last Name']}\n"
             output += f"Age: {student['Age']} years.\n"
             output += f"Gender: {student['Gender']}\n"
